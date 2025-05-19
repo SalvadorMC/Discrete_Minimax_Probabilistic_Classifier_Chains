@@ -14,7 +14,7 @@ from lib.DMC import DBC, DiscreteMinimaxClassifier, DBC_KmeansU, DMC_KmeansU, DM
     BinaryRelevance
 
 datasets = {
-    "CHD_49aaa": load_data(dataset_name="CHD_49.arff"),
+    "CHD_49": load_data(dataset_name="CHD_49.arff"),
     #"Emotions": load_data(dataset_name="Emotions.arff"),
     #"GnegativePseAAC": load_data(dataset_name="GnegativePseAAC.arff"),
     #"GpositivePseAAC": load_data(dataset_name="GpositivePseAAC.arff"),

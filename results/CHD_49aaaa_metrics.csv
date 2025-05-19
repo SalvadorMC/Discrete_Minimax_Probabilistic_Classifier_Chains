@@ -1,4 +1,0 @@
-Zero one Mean,Zero one Std,Hamming Mean,Hamming Std,F1 Mean,F1 Std,Phi avg Mean,Phi avg Std,Phi max Mean,Phi max Std,Psi avg Mean,Psi avg Std,Psi max Mean,Psi max Std,model
-0.8164,0.0393,0.2823,0.0171,0.6544,0.0260,0.5276,0.0381,0.9762,0.0323,0.6896,0.0268,0.9852,0.0296,BR_LR-Subset
-0.8164,0.0393,0.2823,0.0171,0.6544,0.0260,0.5276,0.0381,0.9762,0.0323,0.6896,0.0268,0.9852,0.0296,BR_LR-Hamming
-0.8164,0.0393,0.2823,0.0171,0.6544,0.0260,0.5276,0.0381,0.9762,0.0323,0.6896,0.0268,0.9852,0.0296,BR_LR-F1
