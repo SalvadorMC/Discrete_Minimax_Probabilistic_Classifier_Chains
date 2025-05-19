@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d49ff398-58b7-48c5-88aa-f7be5be6e7ae" name="Changes" comment="lab" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SalvadorMC&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SalvadorMC/Discrete_Minimax_Probabilistic_Classifier_Chains.git",
+    "accountId": "601993e3-59fd-4b90-87fe-862b6ebcf970"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2rwDUX32zdIbprT3FrWqtzkdTqR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Doctests in probability_classifier_chains.executor": "Run",
+    "Python.Binary_Relevance_SuplementaryExperiments.executor": "Run",
+    "Python.Classifier_Chain_SuplementaryExperiment.executor": "Run",
+    "Python.DMC.executor": "Run",
+    "Python.DMC_Binary_Relevance.executor": "Run",
+    "Python.DMC_Classifier_Chain.executor": "Run",
+    "Python.DT_Discretization.executor": "Run",
+    "Python.Discretizaciones.executor": "Run",
+    "Python.Discretization.executor": "Run",
+    "Python.Discretizations.executor": "Run",
+    "Python.DualClassifierChain.executor": "Run",
+    "Python.Dual_Classifier_Chain_Experiments.executor": "Run",
+    "Python.Experiment.executor": "Run",
+    "Python.ExperimentsDCC.executor": "Run",
+    "Python.ExperimentsDMC.executor": "Run",
+    "Python.ExperimentsPCC.executor": "Run",
+    "Python.ExperimentsPartition.executor": "Run",
+    "Python.Partition_results.executor": "Run",
+    "Python.Plot_DMC.executor": "Run",
+    "Python.Prueba_B_pares.executor": "Run",
+    "Python.Radarchart.executor": "Run",
+    "Python.Scripts.executor": "Run",
+    "Python.Test2.executor": "Run",
+    "Python.bar_plot.executor": "Run",
+    "Python.discretizers.executor": "Run",
+    "Python.figura.executor": "Run",
+    "Python.figura2.executor": "Run",
+    "Python.figuracopy.executor": "Run",
+    "Python.figuracopy1.executor": "Run",
+    "Python.hipotesisBuenp.executor": "Run",
+    "Python.hipotesis_2modelos.executor": "Run",
+    "Python.hipotesis_grupo.executor": "Run",
+    "Python.hipotesis_inferencia.executor": "Run",
+    "Python.hipotesis_modelo.executor": "Run",
+    "Python.hipotesis_modelo_all.executor": "Run",
+    "Python.hipotesis_test.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.mlknn.executor": "Run",
+    "Python.plot.executor": "Run",
+    "Python.prueba_A_pares.executor": "Run",
+    "Python.regresion.executor": "Run",
+    "Python.regression2.executor": "Run",
+    "Python.regression3.executor": "Run",
+    "Python.resampling.executor": "Run",
+    "Python.run_experiments.executor": "Run",
+    "Python.scatter_plot.executor": "Run",
+    "Python.show.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/salva/Documents/Salva/UTC/Doctorado/ECSQARU",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\Workshop\Workshop_Milan\results\Paper" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\Workshop\Workshop_Milan\Datasets" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\Workshop\Workshop_Milan\lib\PCC" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\ECSQARU" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\ECSQARU\src" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\ECSQARU\Basura" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\ECSQARU\results" />
+      <recent name="C:\Users\salva\Documents\Salva\UTC\Doctorado\Workshop\Workshop_Milan\Basura" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d49ff398-58b7-48c5-88aa-f7be5be6e7ae" name="Changes" comment="" />
+      <created>1737461259197</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737461259197</updated>
+      <workItem from="1737461261293" duration="372000" />
+      <workItem from="1737461644638" duration="2026000" />
+      <workItem from="1737470357279" duration="5224000" />
+      <workItem from="1737478002850" duration="2479000" />
+      <workItem from="1737534311583" duration="2507000" />
+      <workItem from="1737729035122" duration="358000" />
+      <workItem from="1738056245082" duration="8577000" />
+      <workItem from="1738144097652" duration="14943000" />
+      <workItem from="1738226768729" duration="5459000" />
+      <workItem from="1738314005731" duration="6934000" />
+      <workItem from="1738572929967" duration="15485000" />
+      <workItem from="1739354880162" duration="11090000" />
+      <workItem from="1739376150830" duration="2413000" />
+      <workItem from="1739435330439" duration="18326000" />
+      <workItem from="1739781550375" duration="22254000" />
+      <workItem from="1739865545648" duration="21386000" />
+      <workItem from="1739967167988" duration="4220000" />
+      <workItem from="1739971427421" duration="33764000" />
+      <workItem from="1740138874633" duration="735000" />
+      <workItem from="1740387485404" duration="2418000" />
+      <workItem from="1740471815810" duration="16732000" />
+      <workItem from="1740497271126" duration="4387000" />
+      <workItem from="1740557965701" duration="20844000" />
+      <workItem from="1740645153807" duration="9852000" />
+      <workItem from="1740990777730" duration="41367000" />
+      <workItem from="1741169933565" duration="16507000" />
+      <workItem from="1741249471747" duration="34060000" />
+      <workItem from="1741597780083" duration="3805000" />
+      <workItem from="1741603145551" duration="2519000" />
+      <workItem from="1741607848194" duration="10021000" />
+      <workItem from="1741620752099" duration="4469000" />
+      <workItem from="1741681119403" duration="21662000" />
+      <workItem from="1741771514747" duration="15486000" />
+      <workItem from="1741853309273" duration="27253000" />
+      <workItem from="1741887109377" duration="180000" />
+      <workItem from="1741946996792" duration="10578000" />
+      <workItem from="1742207707312" duration="6136000" />
+      <workItem from="1742377580446" duration="6971000" />
+      <workItem from="1742552724017" duration="19467000" />
+      <workItem from="1742804261526" duration="11132000" />
+      <workItem from="1742892633434" duration="20021000" />
+      <workItem from="1742983401270" duration="9866000" />
+      <workItem from="1743068383058" duration="4859000" />
+      <workItem from="1743159211839" duration="42000" />
+      <workItem from="1743165323252" duration="1350000" />
+      <workItem from="1743166699034" duration="3325000" />
+      <workItem from="1743170259254" duration="12484000" />
+      <workItem from="1743406388260" duration="13656000" />
+      <workItem from="1743492384892" duration="7161000" />
+      <workItem from="1743586945454" duration="12155000" />
+      <workItem from="1743776507253" duration="6540000" />
+      <workItem from="1744010966538" duration="8854000" />
+      <workItem from="1744026582592" duration="11869000" />
+      <workItem from="1744098771238" duration="8518000" />
+      <workItem from="1744125580339" duration="3060000" />
+      <workItem from="1744129375064" duration="16000" />
+      <workItem from="1744131898015" duration="44000" />
+      <workItem from="1744183493348" duration="10406000" />
+      <workItem from="1744203094479" duration="7597000" />
+      <workItem from="1744269727983" duration="10432000" />
+      <workItem from="1744614580727" duration="5750000" />
+      <workItem from="1744701061287" duration="11401000" />
+      <workItem from="1744794935820" duration="3728000" />
+      <workItem from="1744874376730" duration="25181000" />
+      <workItem from="1744909844795" duration="22000" />
+      <workItem from="1744961056026" duration="16504000" />
+      <workItem from="1744999451064" duration="123000" />
+      <workItem from="1745307634603" duration="11845000" />
+      <workItem from="1745333619657" duration="1920000" />
+      <workItem from="1745399838858" duration="8878000" />
+      <workItem from="1745493832603" duration="7137000" />
+      <workItem from="1745569400263" duration="9473000" />
+      <workItem from="1745825271732" duration="5300000" />
+      <workItem from="1745935950830" duration="1576000" />
+      <workItem from="1746198483809" duration="2297000" />
+      <workItem from="1746430801377" duration="31602000" />
+      <workItem from="1746518301671" duration="9871000" />
+      <workItem from="1746537936406" duration="32000" />
+      <workItem from="1746623904358" duration="9187000" />
+      <workItem from="1747038443526" duration="14604000" />
+      <workItem from="1747128608897" duration="5994000" />
+      <workItem from="1747212080511" duration="7388000" />
+      <workItem from="1747307128701" duration="12571000" />
+      <workItem from="1747645271693" duration="1367000" />
+      <workItem from="1747646736195" duration="29000" />
+      <workItem from="1747646821734" duration="9000" />
+      <workItem from="1747646848000" duration="206000" />
+      <workItem from="1747647323884" duration="8324000" />
+      <workItem from="1747668365388" duration="761000" />
+    </task>
+    <task id="LOCAL-00035" summary="lab">
+      <option name="closed" value="true" />
+      <created>1743185689935</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1743185689935</updated>
+    </task>
+    <task id="LOCAL-00036" summary="lab">
+      <option name="closed" value="true" />
+      <created>1743440425031</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1743440425031</updated>
+    </task>
+    <task id="LOCAL-00037" summary="lab">
+      <option name="closed" value="true" />
+      <created>1743600906840</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1743600906841</updated>
+    </task>
+    <task id="LOCAL-00038" summary="lab">
+      <option name="closed" value="true" />
+      <created>1743606097008</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1743606097008</updated>
+    </task>
+    <task id="LOCAL-00039" summary="lab">
+      <option name="closed" value="true" />
+      <created>1743607562313</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1743607562313</updated>
+    </task>
+    <task id="LOCAL-00040" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744024477446</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1744024477446</updated>
+    </task>
+    <task id="LOCAL-00041" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744024641004</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1744024641004</updated>
+    </task>
+    <task id="LOCAL-00042" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744037755979</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1744037755979</updated>
+    </task>
+    <task id="LOCAL-00043" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744112400993</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1744112400993</updated>
+    </task>
+    <task id="LOCAL-00044" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744112634955</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1744112634955</updated>
+    </task>
+    <task id="LOCAL-00045" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744112741358</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1744112741358</updated>
+    </task>
+    <task id="LOCAL-00046" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744129123515</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1744129123515</updated>
+    </task>
+    <task id="LOCAL-00047" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744186049958</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1744186049958</updated>
+    </task>
+    <task id="LOCAL-00048" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744191841283</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1744191841283</updated>
+    </task>
+    <task id="LOCAL-00049" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744206229511</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1744206229511</updated>
+    </task>
+    <task id="LOCAL-00050" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744206413722</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1744206413723</updated>
+    </task>
+    <task id="LOCAL-00051" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744207865608</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1744207865608</updated>
+    </task>
+    <task id="LOCAL-00052" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744277766667</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1744277766667</updated>
+    </task>
+    <task id="LOCAL-00053" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744650715796</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1744650715796</updated>
+    </task>
+    <task id="LOCAL-00054" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744719230984</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1744719230984</updated>
+    </task>
+    <task id="LOCAL-00055" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744796574401</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1744796574402</updated>
+    </task>
+    <task id="LOCAL-00056" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744877931008</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1744877931008</updated>
+    </task>
+    <task id="LOCAL-00057" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744908741803</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1744908741803</updated>
+    </task>
+    <task id="LOCAL-00058" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744909233576</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1744909233576</updated>
+    </task>
+    <task id="LOCAL-00059" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744989287676</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1744989287677</updated>
+    </task>
+    <task id="LOCAL-00060" summary="lab">
+      <option name="closed" value="true" />
+      <created>1744999524826</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1744999524827</updated>
+    </task>
+    <task id="LOCAL-00061" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745309497209</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1745309497209</updated>
+    </task>
+    <task id="LOCAL-00062" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745320926548</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1745320926548</updated>
+    </task>
+    <task id="LOCAL-00063" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745323145025</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1745323145025</updated>
+    </task>
+    <task id="LOCAL-00064" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745332949497</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1745332949497</updated>
+    </task>
+    <task id="LOCAL-00065" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745423494626</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423494626</updated>
+    </task>
+    <task id="LOCAL-00066" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745423684866</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423684866</updated>
+    </task>
+    <task id="LOCAL-00067" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745495005811</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1745495005812</updated>
+    </task>
+    <task id="LOCAL-00068" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745495022418</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1745495022418</updated>
+    </task>
+    <task id="LOCAL-00069" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745569432293</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1745569432294</updated>
+    </task>
+    <task id="LOCAL-00070" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745587001837</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1745587001837</updated>
+    </task>
+    <task id="LOCAL-00071" summary="lab">
+      <option name="closed" value="true" />
+      <created>1745597396325</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1745597396325</updated>
+    </task>
+    <task id="LOCAL-00072" summary="lab">
+      <option name="closed" value="true" />
+      <created>1746206250661</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1746206250662</updated>
+    </task>
+    <task id="LOCAL-00073" summary="lab">
+      <option name="closed" value="true" />
+      <created>1746472219214</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1746472219215</updated>
+    </task>
+    <task id="LOCAL-00074" summary="lab">
+      <option name="closed" value="true" />
+      <created>1746530039690</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1746530039690</updated>
+    </task>
+    <task id="LOCAL-00075" summary="lab">
+      <option name="closed" value="true" />
+      <created>1746537958714</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1746537958715</updated>
+    </task>
+    <task id="LOCAL-00076" summary="lab">
+      <option name="closed" value="true" />
+      <created>1746636399918</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1746636399919</updated>
+    </task>
+    <task id="LOCAL-00077" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747051298781</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1747051298781</updated>
+    </task>
+    <task id="LOCAL-00078" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747065511639</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1747065511639</updated>
+    </task>
+    <task id="LOCAL-00079" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747668494665</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1747668494666</updated>
+    </task>
+    <task id="LOCAL-00080" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747668776526</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1747668776526</updated>
+    </task>
+    <task id="LOCAL-00081" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747668850323</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1747668850323</updated>
+    </task>
+    <task id="LOCAL-00082" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747668975502</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1747668975502</updated>
+    </task>
+    <task id="LOCAL-00083" summary="lab">
+      <option name="closed" value="true" />
+      <created>1747669039892</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1747669039892</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="lab" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://C:/Users/salva/Documents/Salva/UTC/Doctorado/Workshop/Workshop_Milan/results/Paper/Plot_results.ipynb</url>
+          <line>103</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Basura/PP_pares.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Plot_DMC.coverage" NAME="Plot_DMC Coverage Results" MODIFIED="1741887113647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Alpha project/Resultados/Plot_Results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$mlknn.coverage" NAME="mlknn Coverage Results" MODIFIED="1741006483150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/anaconda3/envs/PCC/Lib/site-packages/skmultilearn/adapt" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Scripts.coverage" NAME="Scripts Coverage Results" MODIFIED="1742560986541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$main.coverage" NAME="main Coverage Results" MODIFIED="1746630561713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$ExperimentsDCC.coverage" NAME="ExperimentsDCC Coverage Results" MODIFIED="1740057498361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Experiments" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$scatter_plot.coverage" NAME="scatter_plot Coverage Results" MODIFIED="1747307435867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Discretizaciones.coverage" NAME="Discretizaciones Coverage Results" MODIFIED="1747329016093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/ECSQARU$run_experiments.coverage" NAME="run_experiments Coverage Results" MODIFIED="1747669030083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Dual_Classifier_Chain_Experiments.coverage" NAME="Dual_Classifier_Chain_Experiments Coverage Results" MODIFIED="1741781586889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Beta project/Experiments" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_test.coverage" NAME="hipotesis_test Coverage Results" MODIFIED="1745582233984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesisBuenp.coverage" NAME="hipotesisBuenp Coverage Results" MODIFIED="1747307333221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_grupo.coverage" NAME="hipotesis_grupo Coverage Results" MODIFIED="1747307311370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Radarchart.coverage" NAME="Radarchart Coverage Results" MODIFIED="1747321947332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$figura2.coverage" NAME="figura2 Coverage Results" MODIFIED="1747307257190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$resampling.coverage" NAME="resampling Coverage Results" MODIFIED="1737475104248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Modelos" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$figuracopy1.coverage" NAME="figuracopy1 Coverage Results" MODIFIED="1747307301152" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$regression2.coverage" NAME="regression2 Coverage Results" MODIFIED="1747307416666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/ECSQARU$test.coverage" NAME="test Coverage Results" MODIFIED="1747665103049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Doctests_in_probability_classifier_chains.coverage" NAME="Doctests in probability_classifier_chains Coverage Results" MODIFIED="1743168745696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/PCC" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Test2.coverage" NAME="Test2 Coverage Results" MODIFIED="1745424444233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$ExperimentsPartition.coverage" NAME="ExperimentsPartition Coverage Results" MODIFIED="1740664388094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Experiments" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$figura.coverage" NAME="figura Coverage Results" MODIFIED="1747307237566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$bar_plot.coverage" NAME="bar_plot Coverage Results" MODIFIED="1747323987780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Binary_Relevance_SuplementaryExperiments.coverage" NAME="Binary_Relevance_SuplementaryExperiments Coverage Results" MODIFIED="1741879976749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Alpha project/Experiments/Binary_relevance" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$figuracopy.coverage" NAME="figuracopy Coverage Results" MODIFIED="1747145823004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$test.coverage" NAME="test Coverage Results" MODIFIED="1747321956402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$regresion.coverage" NAME="regresion Coverage Results" MODIFIED="1747307401867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$prueba_A_pares.coverage" NAME="prueba_A_pares Coverage Results" MODIFIED="1747307347355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$DMC_Classifier_Chain.coverage" NAME="DMC_Classifier_Chain Coverage Results" MODIFIED="1741281294659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Experiments/Classifier_Chains" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$DMC_Binary_Relevance.coverage" NAME="DMC_Binary_Relevance Coverage Results" MODIFIED="1741886600258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Alpha project/Experiments/Binary_relevance" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$ExperimentsDMC.coverage" NAME="ExperimentsDMC Coverage Results" MODIFIED="1740046966847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Experiments" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_modelo_all.coverage" NAME="hipotesis_modelo_all Coverage Results" MODIFIED="1745597080833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$DualClassifierChain.coverage" NAME="DualClassifierChain Coverage Results" MODIFIED="1741615384111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Modelos" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Discretizations.coverage" NAME="Discretizations Coverage Results" MODIFIED="1747314552073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_modelo.coverage" NAME="hipotesis_modelo Coverage Results" MODIFIED="1745595914072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Partition_results.coverage" NAME="Partition_results Coverage Results" MODIFIED="1741091322106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Resultados/Plot_Results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$DT_Discretization.coverage" NAME="DT_Discretization Coverage Results" MODIFIED="1747311120107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$regression3.coverage" NAME="regression3 Coverage Results" MODIFIED="1747307424610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Classifier_Chain_SuplementaryExperiment.coverage" NAME="Classifier_Chain_SuplementaryExperiment Coverage Results" MODIFIED="1741345236465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Experiments/Classifier_Chains" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Experiment.coverage" NAME="Experiment Coverage Results" MODIFIED="1745331236084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_inferencia.coverage" NAME="hipotesis_inferencia Coverage Results" MODIFIED="1747307323163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Prueba_B_pares.coverage" NAME="Prueba_B_pares Coverage Results" MODIFIED="1747307358177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$show.coverage" NAME="show Coverage Results" MODIFIED="1741094688684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$hipotesis_2modelos.coverage" NAME="hipotesis_2modelos Coverage Results" MODIFIED="1745317350285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$Discretization.coverage" NAME="Discretization Coverage Results" MODIFIED="1747311101332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$ExperimentsPCC.coverage" NAME="ExperimentsPCC Coverage Results" MODIFIED="1738243508698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$DMC.coverage" NAME="DMC Coverage Results" MODIFIED="1744983129339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$discretizers.coverage" NAME="discretizers Coverage Results" MODIFIED="1742582895985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Modelos" />
+    <SUITE FILE_PATH="coverage/Workshop_Milan$plot.coverage" NAME="plot Coverage Results" MODIFIED="1741784948170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Beta project/Results/Figures" />
+  </component>
+</project>

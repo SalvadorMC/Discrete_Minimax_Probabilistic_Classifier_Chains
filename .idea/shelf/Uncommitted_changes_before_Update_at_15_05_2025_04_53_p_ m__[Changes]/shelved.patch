@@ -1,0 +1,447 @@
+Index: results/regresion.py
+===================================================================
+diff --git a/results/regresion.py b/results/regresion.py
+deleted file mode 100644
+--- a/results/regresion.py	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
++++ /dev/null	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
+@@ -1,68 +0,0 @@
+-import os
+-import pandas as pd
+-import matplotlib.pyplot as plt
+-from scipy.stats import linregress
+-
+-def load_model_metrics(folder, model_inf, metric1, metric2):
+-    """
+-    Devuelve un DataFrame con columnas [dataset, metric1, metric2]
+-    para el par modelo-inferencia dado (model_inf).
+-    """
+-    rows = []
+-    for f in sorted(os.listdir(folder)):
+-        if not f.lower().endswith('.csv'):
+-            continue
+-        df = pd.read_csv(os.path.join(folder, f))
+-        # Filtra filas del modelo completo exacto
+-        sel = df['model'].str.strip() == model_inf
+-        if 'model' not in df.columns or metric1 not in df.columns or metric2 not in df.columns or not sel.any():
+-            continue
+-        val1 = df.loc[sel, metric1].values[0]
+-        val2 = df.loc[sel, metric2].values[0]
+-        rows.append({
+-            'dataset': os.path.splitext(f)[0],
+-            metric1: val1,
+-            metric2: val2
+-        })
+-    return pd.DataFrame(rows)
+-
+-def plot_regression(df, metric1, metric2, model_inf):
+-    """
+-    Dibuja scatter y línea de regresión, e imprime R² y p-valor.
+-    """
+-    x = df[metric1]
+-    y = df[metric2]
+-    slope, intercept, r_value, p_value, std_err = linregress(x, y)
+-
+-    plt.figure()
+-    plt.scatter(x, y)
+-    plt.plot(x, intercept + slope * x)
+-    plt.xlabel(metric1)
+-    plt.ylabel(metric2)
+-    plt.title(f'{model_inf}\nR²={r_value**2:.3f}, p={p_value:.3f}')
+-    plt.tight_layout()
+-    plt.show()
+-
+-if __name__ == '__main__':
+-    # ─── Configura aquí ───────────────────────────────────────────
+-    base_dir = os.path.abspath(os.path.dirname(__file__))
+-    paper_folder = os.path.join(base_dir, 'Paper')
+-
+-    # Nombres exactos de tus dos métricas
+-    metric1 = "Zero one Mean"
+-    metric2 = "Phi avg Mean"
+-
+-    # Lista de modelo-inferencia(s) a procesar
+-    modelos = ["LR-Subset","WLR-Subset"]
+-
+-    # ─── Ejecución ───────────────────────────────────────────────────
+-    for mi in modelos:
+-        df_m = load_model_metrics(paper_folder, mi, metric1, metric2)
+-        if df_m.empty:
+-            print(f'No hay datos para "{mi}"')
+-            continue
+-        # Muestra la tabla de pares (opcional)
+-        print(f'\nValores para {mi}:')
+-        print(df_m.to_string(index=False))
+-        # Grafica y calcula regresión
+-        plot_regression(df_m, metric1, metric2, mi)
+Index: results/regression2.py
+===================================================================
+diff --git a/results/regression2.py b/results/regression2.py
+deleted file mode 100644
+--- a/results/regression2.py	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
++++ /dev/null	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
+@@ -1,71 +0,0 @@
+-import os
+-import pandas as pd
+-import matplotlib.pyplot as plt
+-
+-# ─── 0) CONFIG ───────────────────────────────────────────────────────────
+-base_dir     = os.path.abspath(os.path.dirname(__file__))
+-paper_folder = os.path.join(base_dir, "Paper")
+-
+-# la métrica que quieres graficar
+-metrica1 = "Hamming"
+-metrica2 = "Phi avg Mean"
+-metrica3 = "Psi avg Mean"
+-
+-
+-# lista de modelos completos (incluye inferencia)
+-model_fulls  = ["LR-Hamming", "DMC_Union-Hamming"]  # agrega aquí más modelos si quieres
+-model_full_labels =["LR","DMC"]
+-# diccionario externo con valores por dataset
+-ext_vals = {
+-    "CHD_49_metrics": 5.77,
+-    "Emotions_metrics":  1.47,
+-    "Flags_metrics": 2.25,
+-    "Foodtruck_metrics":  7.09,
+-    "GnegativePseAAC_metrics": 18.44,
+-    "GpositivePseAAC_metrics":3.86,
+-    "Image_metrics":1.19,
+-    "PlantPseAAC_metrics":6.69,
+-    "Scene_metrics":1.25,
+-    "VirusPseAAC_metrics":4.04
+-}
+-
+-# ─── 1) Preparar x común (valores externos) ───────────────────────────────
+-x_series = pd.Series(ext_vals)
+-
+-# ─── 2) Para cada modelo, cargar métrica y emparejar con x ───────────────
+-plt.figure()
+-i=0
+-for model_full in model_fulls:
+-    # cargar métrica por dataset
+-    rows = []
+-    for f in sorted(os.listdir(paper_folder)):
+-        if not f.lower().endswith('.csv'):
+-            continue
+-        df = pd.read_csv(os.path.join(paper_folder, f))
+-        sel = df['model'].str.strip() == model_full
+-        if not sel.any() or metrica not in df.columns:
+-            continue
+-        dataset = os.path.splitext(f)[0]
+-        val = df.loc[sel, metrica].values[0]
+-        rows.append({'dataset': dataset, metrica: val})
+-    df_m = pd.DataFrame(rows).set_index('dataset')
+-
+-    # emparejar con ext_vals
+-    common_ds = df_m.index.intersection(x_series.index)
+-    # ordenar datasets según el valor externo ascendente
+-    common_ds = sorted(common_ds, key=lambda d: x_series[d])
+-    x = x_series.loc[common_ds].values
+-    y = df_m.loc[common_ds, metrica].values
+-
+-    # gráfico de dispersión conectado con líneas punteadas en orden de x
+-    plt.plot(x, y, linestyle='--', marker='o', label=model_full_labels[i])
+-    i=i+1
+-
+-# ─── 3) Formatear gráfico ─────────────────────────────────────────────────
+-plt.xlabel('Mean IR')
+-#plt.ylabel(r"$\mathcal{L}_{\text{0/1}}$")
+-plt.ylabel(r"$\psi_{\text{avg}}$")
+-plt.legend()
+-plt.tight_layout()
+-plt.savefig("Scatter.png", format="png", dpi=300, bbox_inches="tight")
+-plt.show()
+\ No newline at end of file
+Index: results/Basura/Discretization.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/results/Basura/Discretization.py b/results/Basura/Discretization.py
+new file mode 100644
+--- /dev/null	(date 1747311120095)
++++ b/results/Basura/Discretization.py	(date 1747311120095)
+@@ -0,0 +1,59 @@
++import matplotlib.pyplot as plt
++from sklearn.datasets import make_blobs
++from sklearn.cluster import KMeans
++from scipy.spatial import Voronoi, voronoi_plot_2d
++import numpy as np
++import pandas as pd
++
++# Generación de datos
++X, y = make_blobs(n_samples=[4500, 500],
++                 n_features=2,
++                 centers=[(9.5, 10), (10.5, 7.6)],
++                 cluster_std=[[1, 1.5], [0.9, 0.9]],
++                 shuffle=True,
++                 random_state=42)
++
++# Conversión a DataFrame para facilidad
++X_df = pd.DataFrame(X, columns=['X1', 'X2'])
++y_df = pd.DataFrame(y, columns=['y'])
++
++# Aplicación de KMeans con 10 centroides
++clf_kmeans = KMeans(n_clusters=25, random_state=0)
++clf_kmeans.fit(X)
++centroids = clf_kmeans.cluster_centers_
++
++# Definición de los límites del gráfico
++x_min, x_max = X[:, 0].min() -.55 , X[:, 0].max() +.55
++y_min, y_max = X[:, 1].min() -.55, X[:, 1].max() +.55
++
++# Figura
++plt.figure(figsize=(12, 8))
++
++# Dibujar las regiones de decisión
++
++# Scatter plot con estilo original
++plt.scatter(X_df.loc[y_df['y'] == 0, 'X1'], X_df.loc[y_df['y'] == 0, 'X2'],
++            color='deepskyblue', marker='.', s=90)
++plt.scatter(X_df.loc[y_df['y'] == 1, 'X1'], X_df.loc[y_df['y'] == 1, 'X2'],
++            color='orange', marker='*', s=80)
++
++
++# Generar el diagrama de Voronoi con líneas negras y más gruesas
++vor = Voronoi(centroids)
++voronoi_plot_2d(vor, show_points=False, show_vertices=False, s=2, ax=plt.gca(),line_width=2)
++
++# Configuración del gráfico
++plt.xlabel("$X_1$", fontsize=15)
++plt.ylabel("$X_2$", fontsize=15)
++plt.title("Kmeans discretization", fontsize=18)
++plt.tick_params(axis='x', labelsize=12)
++plt.tick_params(axis='y', labelsize=12)
++
++# Ajustar límites del gráfico
++plt.xlim(x_min, x_max)
++plt.ylim(y_min, y_max)
++
++plt.show()
++
++
++
+Index: lib/DMC.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import numpy as np\r\nimport matplotlib.pyplot as plt\r\nfrom itertools import combinations\r\nfrom sklearn.cluster import KMeans\r\nfrom sklearn.metrics import confusion_matrix, accuracy_score\r\nfrom sklearn.model_selection import GridSearchCV\r\nfrom sklearn.utils import check_random_state\r\nfrom sklearn.utils.validation import check_X_y, check_array, check_is_fitted\r\nfrom sklearn.metrics import make_scorer\r\nfrom sklearn.utils.multiclass import type_of_target\r\nfrom sklearn.base import BaseEstimator, ClassifierMixin\r\nfrom sklearn.exceptions import NotFittedError\r\nfrom sklearn.base import clone\r\nfrom sklearn.preprocessing import LabelEncoder\r\nimport warnings\r\nfrom lib.Scripts import compute_prios\r\nfrom sklearn.linear_model import LogisticRegression\r\n\r\nwarnings.filterwarnings('ignore')\r\n\r\ndef make_box(pi, rho):\r\n    \"\"\"\r\n    Crea la 'caja' de intervalos [a_i, b_i] para cada valor pi_i,\r\n    sujeta a las restricciones del dominio [0, 1].\r\n\r\n    Si TODOS los intervalos generados son [0, 1], devuelve None.\r\n    :param pi:  matrix [[pi^1_0,pi^1_1],...,[pi^k_0,pi^k_1]]\r\n    :param rho: número real que define el radio\r\n    :return: [[pi^1_0+-rho,pi^1_1+-rho],...,[pi^k_0+-rho,pi^k_1+-rho]]\r\n\r\n    \"\"\"\r\n    #priors = []\r\n    #constraint1 = []\r\n    #constraint2 = []\r\n    a = max(0, pi[0] - rho)\r\n    b = min(pi[ 0] + rho, 1)\r\n    c = max(0, pi[1] - rho)\r\n    d = min(pi[1] + rho, 1)\r\n\r\n    if a == 0 and b == 1 and c == 0 and d == 1:\r\n            return None\r\n    else:\r\n        return np.array([[a, b], [c, d]])\r\n\r\nclass DBC(BaseEstimator, ClassifierMixin):\r\n    def __init__(\r\n            self,\r\n            T=\"auto\",\r\n            random_state=None,\r\n    ):\r\n        self.T = T\r\n        self.random_state = random_state\r\n        self.pHat = None\r\n        self.piStar = None\r\n\r\n    def fit(self, X, y):\r\n        X, y = check_X_y(X, y)\r\n        self.classes_ = np.unique(y)\r\n        #if len(self.classes_) < 2:\r\n        #   raise ValueError(\"This estimator requires at least two classes in the data.\")\r\n        #self.label_encoder_ = LabelEncoder()\r\n        #y = self.label_encoder_.fit_transform(y)\r\n\r\n        K = len(self.classes_)\r\n        self.L = np.ones((K, K)) - np.eye(K)\r\n        if self.T == \"auto\":\r\n            self.T = self.get_T_optimal(X, y)['T']\r\n        self.discretize(X,y)\r\n        discrete_profiles = self.clf_discretizer.labels_\r\n        self.pHat = compute_pHat(discrete_profiles, y, K, self.T)\r\n        self.piStar = compute_pi(y, K)\r\n        return self\r\n\r\n    def predict(self, X):\r\n        #X = check_array(X,dtype=np.float64)\r\n        discrete_profiles = self.clf_discretizer.predict(X)\r\n        y_pred =predict_profile_label(self.piStar, self.pHat, self.L)[discrete_profiles]\r\n        return y_pred\r\n\r\n    def predict_proba(self,X):\r\n        lambd = (self.piStar.reshape(-1, 1) * self.L).T @ self.pHat\r\n        prob = 1 - (lambd / np.sum(lambd, axis=0))\r\n        return prob[:, self.clf_discretizer.predict(X)].T\r\n\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = KMeans(n_clusters=self.T)\r\n        self.clf_discretizer.fit(X)\r\n\r\n    def get_T_optimal(self, X, y, T_start=None, T_end=None, Num_t_Values=15):\r\n        if T_start is None:\r\n            T_start = int(len(X) / 30)\r\n        if T_end is None:\r\n            T_end = int(len(X) / 4)\r\n        t_values = np.unique(np.linspace(T_start, T_end, Num_t_Values, dtype=int))\r\n        #print(t_values)\r\n        param_grid = {\r\n            'T': t_values\r\n        }\r\n        grid_search = GridSearchCV(estimator=DBC(), param_grid=param_grid, cv=3, scoring=\"accuracy\")\r\n        grid_search.fit(X, y)\r\n        # Extraer todos los resultados\r\n        results = grid_search.cv_results_\r\n        mean_scores = results['mean_test_score']\r\n        params = results['param_T'].data  # 'param_T' es una columna de objetos\r\n\r\n        # Encuentra el mayor T entre los mejores scores\r\n        max_score = np.max(mean_scores)\r\n        best_Ts = [params[i] for i, score in enumerate(mean_scores) if score == max_score]\r\n        best_T = max(best_Ts)  # elegir el T más grande entre los mejores\r\n        return {'T': best_T}\r\n\r\n\r\nclass DiscreteMinimaxClassifier(DBC):\r\n\r\n    def __init__(\r\n            self,\r\n            N=10000,\r\n            L=None,\r\n            box=None,\r\n            T = \"auto\",\r\n    ):\r\n        super().__init__(T=T)\r\n        #self.T = T\r\n        self.N = N\r\n        self.L = L\r\n        self.box = box\r\n\r\n    def fit(self, X, y):\r\n        self.piStar = None\r\n        self.piTrain = None\r\n        self.pHat = None\r\n        #self.random_state = check_random_state(self.random_state)\r\n\r\n        K = len(np.unique(y))\r\n        if self.L is None:\r\n            self.L = np.ones((K, K)) - np.eye(K)\r\n        if self.T == \"auto\":\r\n            self.T = self.get_T_optimal(X, y)['T']\r\n        #print(self.T)\r\n        #print(self.T)\r\n        #self.clf_discretizer.fit(X, y)\r\n        self.discretize(X,y)\r\n        self.discrete_profiles = self.clf_discretizer.labels_\r\n        #self.T = self.clf_discretizer.T\r\n        self.pHat = compute_pHat(self.discrete_profiles, y, K, self.T)\r\n        self.piTrain = compute_pi(y, K)\r\n\r\n        if self.box is not None:\r\n            self.box = make_box(compute_pi(y, K), self.box)\r\n\r\n        self.piStar, rStar, self.RStar, V_iter, stockpi = compute_piStar(self.pHat, y, K, self.L, self.T,\r\n                                                                         self.N, 0, self.box)\r\n        self.classes_ = np.unique(y)\r\n        return self\r\n\r\n    def predict(self, X, pi=None):\r\n        if pi is None:\r\n            pi = self.piStar\r\n        # print(predict_profile_label(pi, self.pHat, self.L))\r\n\r\n        discrete_profiles = self.clf_discretizer.predict(X)\r\n\r\n        return predict_profile_label(pi, self.pHat, self.L)[discrete_profiles]\r\n\r\n\r\n\r\n######## Union k kmeans ###################\r\n\r\nfrom sklearn.cluster import KMeans\r\nfrom scipy.spatial.distance import cdist\r\n\r\nclass KMeansUnionDiscretizer:\r\n    \"\"\"\r\n    Discretizador class-aware via KMeans:\r\n      - Divide cada clase en un número de clusters proporcional a su frecuencia.\r\n      - Une todos los centroides y asigna cada punto a su centro más cercano.\r\n\r\n    Parámetros\r\n    ----------\r\n    T : int\r\n        Número total de regiones discretas deseadas.\r\n    random_state : int o None\r\n        Semilla para reproducibilidad.\r\n    \"\"\"\r\n\r\n    def __init__(self, T=10, random_state=None):\r\n        self.T = T\r\n        self.random_state = random_state\r\n        self.centers_ = None\r\n\r\n    def fit(self, X, y):\r\n        X = np.asarray(X)\r\n        y = np.asarray(y)\r\n        classes, counts = np.unique(y, return_counts=True)\r\n        total = len(y)\r\n\r\n        # Calcular número de clusters por clase según proporción empírica\r\n        n_clusters = {}\r\n        for c, cnt in zip(classes, counts):\r\n            # al menos 1 centro por clase\r\n            n_clusters[c] = max(1, round(cnt / total * self.T))\r\n        # Ajustar para que sumen exactamente T\r\n        delta = self.T - sum(n_clusters.values())\r\n        # si falta, añade 1 cluster a la clase con más muestras, etc.\r\n        for _ in range(abs(delta)):\r\n            key = classes[np.argmax(counts)] if delta < 0 else classes[np.argmin(counts)]\r\n            n_clusters[key] += 1 if delta < 0 else -1\r\n\r\n        centroids = []\r\n        for c in classes:\r\n            Xc = X[y == c]\r\n            k = n_clusters[c]\r\n            kmeans = KMeans(n_clusters=k, random_state=self.random_state)\r\n            centroids.append(kmeans.fit(Xc).cluster_centers_)\r\n        self.centers_ = np.vstack(centroids)\r\n        distances = cdist(X, self.centers_)\r\n        self.labels_ = np.argmin(distances, axis=1)\r\n        centers_clean = self._cleanup_centers(\r\n            self.centers_, X, self.labels_\r\n        )\r\n\r\n        self.centers_ = centers_clean\r\n        self.T = len(centers_clean)\r\n        return self\r\n\r\n    def predict(self, X):\r\n        if self.centers_ is None:\r\n            raise ValueError(\"Debes llamar primero a fit().\")\r\n        X = np.asarray(X)\r\n        dist = cdist(X, self.centers_)\r\n        return np.argmin(dist, axis=1)\r\n\r\n    def _cleanup_centers(self,centers, X, labels, min_size=1):\r\n        \"\"\"\r\n        - centers: array (m, d) de centros tras KMeans\r\n        - X:     array (n, d) de datos usados en ese KMeans\r\n        - labels: array (n,) con la asignación de cada X a un centro\r\n        - min_size: tamaño mínimo aceptable de un cluster\r\n        - merge_thresh: distancia máxima para fusionar dos centros\r\n        \"\"\"\r\n        # 1) contar cuántos puntos hay en cada centro\r\n        counts = np.bincount(labels, minlength=len(centers))\r\n\r\n        # --- Reparar clusters vacíos o muy pequeños ------------------\r\n        # re‐inicializar los vacíos en el punto de mayor distancia a todos\r\n        for idx, cnt in enumerate(counts):\r\n            if cnt < min_size:\r\n                print(\"ahhhhhhhhh\")\r\n                # hallamos para cada muestra su distancia mínima al resto de centros\r\n                dists = np.min(cdist(X, np.delete(centers, idx, axis=0)), axis=1)\r\n                # elegimos la muestra más “aislada” para reubicar el centro\r\n                far_idx = np.argmax(dists)\r\n                centers[idx] = X[far_idx]\r\n                # actualizamos su count a 1\r\n                counts[idx] = 1\r\n        return centers\r\n\r\nclass DBC_KmeansU(DBC):\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = KMeansUnionDiscretizer(T=self.T)\r\n        self.clf_discretizer.fit(X,y)\r\n        self.T =self.clf_discretizer.T\r\n\r\nclass DMC_KmeansU(DiscreteMinimaxClassifier):\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = KMeansUnionDiscretizer(T=self.T)\r\n        self.clf_discretizer.fit(X,y)\r\n        self.T =self.clf_discretizer.T\r\n\r\n    def get_T_optimal(self, X, y, T_start=None, T_end=None, Num_t_Values=15):\r\n        #todo check this values\r\n        if T_start is None:\r\n            T_start = int(len(X) / 30)\r\n        if T_end is None:\r\n            T_end = int(len(X) / 4)\r\n        t_values = np.unique(np.linspace(T_start, T_end, Num_t_Values, dtype=int))\r\n        #print(t_values)\r\n        param_grid = {\r\n            'T': t_values\r\n        }\r\n        grid_search = GridSearchCV(estimator=DBC_KmeansU(), param_grid=param_grid, cv=3, scoring=\"accuracy\")\r\n        grid_search.fit(X, y)\r\n        # Extraer todos los resultados\r\n        results = grid_search.cv_results_\r\n        mean_scores = results['mean_test_score']\r\n        params = results['param_T'].data  # 'param_T' es una columna de objetos\r\n\r\n        # Encuentra el mayor T entre los mejores scores\r\n        max_score = np.max(mean_scores)\r\n        best_Ts = [params[i] for i, score in enumerate(mean_scores) if score == max_score]\r\n        best_T = max(best_Ts)  # elegir el T más grande entre los mejores\r\n        return {'T': best_T}\r\n\r\n# Logistic regression dicretizer ############\r\nclass LogisticDiscretizer:\r\n    \"\"\"\r\n     Discretiza un conjunto de datos en T regiones basadas en curvas de nivel\r\n     de la probabilidad de un clasificador de regresión logística,\r\n     usando 0.5 como línea base y distribuyendo thresholds en ambos lados.\r\n\r\n     Parámetros\r\n     ----------\r\n     T : int\r\n         Número de regiones discretas deseadas.\r\n     random_state : int o None\r\n         Semilla para reproducibilidad.\r\n     \"\"\"\r\n\r\n    def __init__(self, T=10, random_state=None,weighted=False):\r\n        self.T = T\r\n        self.random_state = random_state\r\n        self.clf_ = None\r\n        self.thresholds_ = None\r\n        self.labels_ = None\r\n        self.weighted = weighted\r\n\r\n    def fit(self, X, y):\r\n        \"\"\"\r\n        Ajusta el modelo con X e y, calcula thresholds distribuidos\r\n        alrededor de 0.5 (quartiles relativos) y asigna labels.\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n        y : array-like, shape (n_samples,)\r\n\r\n        Retorna\r\n        -------\r\n        self : object\r\n        \"\"\"\r\n        X = np.array(X)\r\n        y = np.array(y)\r\n\r\n        # Entrenar regresión logística y obtener probabilidades\r\n        if self.weighted:\r\n            self.clf_ = LogisticRegression(random_state=self.random_state,class_weight=\"balanced\")\r\n        else:\r\n            self.clf_ = LogisticRegression(random_state=self.random_state)\r\n        self.clf_.fit(X, y)\r\n        probs = self.clf_.predict_proba(X)[:, 1]\r\n\r\n        # Número de thresholds interiores y cómo repartirlos\r\n        # T regiones generan T-1 cortes; uno se fija en 0.5\r\n        n_inner = self.T - 1\r\n        remaining = n_inner - 1\r\n        lower_cnt = remaining // 2\r\n        upper_cnt = remaining - lower_cnt\r\n\r\n        # Subconjuntos de probabilidades bajo y sobre 0.5\r\n        below = probs[probs < 0.5]\r\n        above = probs[probs > 0.5]\r\n\r\n        # Cálculo de thresholds para cada lado\r\n        thr_b = np.array([])\r\n        if lower_cnt > 0 and len(below) >= lower_cnt:\r\n            p_b = np.linspace(0, 100, lower_cnt + 2)[1:-1]\r\n            thr_b = np.percentile(below, p_b)\r\n\r\n        thr_a = np.array([])\r\n        if upper_cnt > 0 and len(above) >= upper_cnt:\r\n            p_a = np.linspace(0, 100, upper_cnt + 2)[1:-1]\r\n            thr_a = np.percentile(above, p_a)\r\n\r\n        # Construir array de thresholds incluyendo extremos y 0.5\r\n        self.thresholds_ = np.concatenate([\r\n            [probs.min()],\r\n            thr_b,\r\n            [0.5],\r\n            thr_a,\r\n            [probs.max()]\r\n        ])\r\n\r\n        # Asignar cada muestra a su región\r\n        self.labels_ = np.digitize(probs, self.thresholds_[1:-1], right=True)\r\n        return self\r\n\r\n    def predict(self, X):\r\n        \"\"\"\r\n        Asigna nuevas muestras X a las regiones definidas en fit().\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n\r\n        Retorna\r\n        -------\r\n        labels : ndarray, shape (n_samples,)\r\n        \"\"\"\r\n        X = np.array(X)\r\n        probs = self.clf_.predict_proba(X)[:, 1]\r\n        return np.digitize(probs, self.thresholds_[1:-1], right=True)\r\n\r\nimport numpy as np\r\nfrom sklearn.base import clone\r\nfrom sklearn.linear_model import LogisticRegression\r\n\r\nclass ProbDiscretizer:\r\n    \"\"\"\r\n     Discretiza un conjunto de datos en T regiones basadas en curvas de nivel\r\n     de la probabilidad de un clasificador, usando 0.5 como línea base\r\n     y distribuyendo thresholds en ambos lados.\r\n\r\n     Parámetros\r\n     ----------\r\n     T : int\r\n         Número de regiones discretas deseadas.\r\n     classifier : estimator compatible con predict_proba, opcional\r\n         Clasificador a usar para generar probabilidades. Si no se proporciona,\r\n         se utiliza LogisticRegression.\r\n     random_state : int o None\r\n         Semilla para reproducibilidad (sólo si se usa LogisticRegression por defecto).\r\n     \"\"\"\r\n\r\n    def __init__(self, T=10, classifier=None, random_state=None):\r\n        self.T = T\r\n        self.classifier = classifier\r\n        self.random_state = random_state\r\n        self.clf_ = None\r\n        self.thresholds_ = None\r\n        self.labels_ = None\r\n\r\n    def fit(self, X, y):\r\n        \"\"\"\r\n        Ajusta el modelo con X e y, calcula thresholds distribuidos\r\n        alrededor de 0.5 (cuartiles relativos) y asigna labels.\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n        y : array-like, shape (n_samples,)\r\n\r\n        Retorna\r\n        -------\r\n        self : object\r\n        \"\"\"\r\n        X = np.array(X)\r\n        y = np.array(y)\r\n\r\n        # Entrenar clasificador y obtener probabilidades\r\n        if self.classifier is None:\r\n            base_clf = LogisticRegression(random_state=self.random_state)\r\n        else:\r\n            # Clonar el clasificador proporcionado para no alterar el original\r\n            base_clf = clone(self.classifier)\r\n\r\n        self.clf_ = base_clf\r\n        self.clf_.fit(X, y)\r\n        probs = self.clf_.predict_proba(X)[:, 1]\r\n\r\n        # Número de thresholds interiores y cómo repartirlos\r\n        n_inner = self.T - 1\r\n        remaining = n_inner - 1\r\n        lower_cnt = remaining // 2\r\n        upper_cnt = remaining - lower_cnt\r\n\r\n        # Subconjuntos de probabilidades bajo y sobre 0.5\r\n        below = probs[probs < 0.5]\r\n        above = probs[probs > 0.5]\r\n\r\n        # Cálculo de thresholds para cada lado\r\n        thr_b = np.array([])\r\n        if lower_cnt > 0 and len(below) >= lower_cnt:\r\n            p_b = np.linspace(0, 100, lower_cnt + 2)[1:-1]\r\n            thr_b = np.percentile(below, p_b)\r\n\r\n        thr_a = np.array([])\r\n        if upper_cnt > 0 and len(above) >= upper_cnt:\r\n            p_a = np.linspace(0, 100, upper_cnt + 2)[1:-1]\r\n            thr_a = np.percentile(above, p_a)\r\n\r\n        # Construir array de thresholds incluyendo extremos y 0.5\r\n        self.thresholds_ = np.concatenate([\r\n            [probs.min()],\r\n            thr_b,\r\n            [0.5],\r\n            thr_a,\r\n            [probs.max()]\r\n        ])\r\n\r\n        # Asignar cada muestra a su región\r\n        self.labels_ = np.digitize(probs, self.thresholds_[1:-1], right=True)\r\n        return self\r\n\r\n    def predict(self, X):\r\n        \"\"\"\r\n        Asigna nuevas muestras X a las regiones definidas en fit().\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n\r\n        Retorna\r\n        -------\r\n        labels : ndarray, shape (n_samples,)\r\n        \"\"\"\r\n        X = np.array(X)\r\n        probs = self.clf_.predict_proba(X)[:, 1]\r\n        return np.digitize(probs, self.thresholds_[1:-1], right=True)\r\n\r\n\r\nclass DBC_logistic(DBC):\r\n    def __init__(self,T=\"auto\",weighted=False):\r\n        super().__init__(T=T)\r\n        self.weighted = weighted\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = LogisticDiscretizer(T=self.T,weighted=self.weighted)\r\n        self.clf_discretizer.fit(X,y)\r\n\r\n\r\nclass DMC_logistic(DiscreteMinimaxClassifier):\r\n    def __init__(self,weighted=False,T=\"auto\"):\r\n        super().__init__(T=T)\r\n        self.weighted = weighted\r\n\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = LogisticDiscretizer(T=self.T,weighted=self.weighted)\r\n        self.clf_discretizer.fit(X,y)\r\n    def get_T_optimal(self, X, y, T_start=None, T_end=None, Num_t_Values=15):\r\n        if T_start is None:\r\n            #T_start = int(len(X) / 25)\r\n            T_start = 10\r\n        if T_end is None:\r\n            T_end = int(len(X) / 5)\r\n            #T_end = 20\r\n        t_values = np.unique(np.linspace(T_start, T_end, Num_t_Values, dtype=int))\r\n        #print(t_values)\r\n        param_grid = {\r\n            'T': t_values\r\n        }\r\n        grid_search = GridSearchCV(estimator=DBC_logistic(weighted=self.weighted), param_grid=param_grid, cv=3, scoring=\"accuracy\")\r\n        grid_search.fit(X, y)\r\n        # Extraer todos los resultados\r\n        results = grid_search.cv_results_\r\n        mean_scores = results['mean_test_score']\r\n        params = results['param_T'].data  # 'param_T' es una columna de objetos\r\n\r\n        # Encuentra el mayor T entre los mejores scores\r\n        max_score = np.max(mean_scores)\r\n        best_Ts = [params[i] for i, score in enumerate(mean_scores) if score == max_score]\r\n        best_T = max(best_Ts)  # elegir el T más grande entre los mejores\r\n        return {'T': best_T}\r\n\r\nfrom sklearn.tree import DecisionTreeClassifier\r\n\r\nclass DecisionTreeDiscretizer:\r\n    \"\"\"\r\n    Discretiza datos en regiones usando las hojas de un árbol de decisión.\r\n\r\n    Parámetros\r\n    ----------\r\n    T : int or None\r\n        Número máximo de hojas (regiones) deseadas.\r\n    min_samples_leaf : int\r\n        Mínimo de muestras que debe tener cada hoja.\r\n    random_state : int o None\r\n        Semilla para reproducibilidad.\r\n    \"\"\"\r\n\r\n    def __init__(self, T=None, min_samples_leaf=1,random_state=None,weighted=False):\r\n        self.max_leaf_nodes = T\r\n        self.min_samples_leaf = min_samples_leaf\r\n        self.random_state = random_state\r\n\r\n        self.tree_ = None\r\n        self.leaf_mapping = None  # dict {leaf_id: región_index}\r\n        self.T = None\r\n        self.weighted = weighted\r\n\r\n    def fit(self, X, y):\r\n        # Entrena el árbol con control de hojas\r\n        if self.weighted:\r\n            self.tree_ = DecisionTreeClassifier(\r\n            max_leaf_nodes=self.max_leaf_nodes, #maximo numero de hojas\r\n            min_samples_leaf=self.min_samples_leaf,\r\n            random_state=self.random_state,\r\n            class_weight='balanced'\r\n            )\r\n        else:\r\n            self.tree_ = DecisionTreeClassifier(\r\n            max_leaf_nodes=self.max_leaf_nodes, #maximo numero de hojas\r\n            min_samples_leaf=self.min_samples_leaf,\r\n            random_state=self.random_state,\r\n            )\r\n        self.tree_.fit(X, y)\r\n        # Obtener IDs de hoja para cada muestra de entrenamiento\r\n        leaf_ids = self.tree_.apply(X)\r\n        unique_leaves = np.unique(leaf_ids)\r\n\r\n        # Mapear cada leaf_id a un índice 0,1,...,T-1\r\n        self.leaf_mapping = {leaf: idx for idx, leaf in enumerate(unique_leaves)}\r\n        self.T = len(unique_leaves)\r\n        self.labels_ = self.predict(X)\r\n\r\n        return self\r\n\r\n    def predict(self, X):\r\n        if self.tree_ is None or self.leaf_mapping is None:\r\n            raise ValueError(\"Discretizer not fitted. Call `fit` first.\")\r\n\r\n        leaf_ids = self.tree_.apply(X)\r\n        # Mapear cada leaf_id usando el diccionario guardado\r\n        try:\r\n            return np.array([self.leaf_mapping[leaf] for leaf in leaf_ids])\r\n        except KeyError as e:\r\n            raise ValueError(f\"Leaf ID desconocido: {e}\")\r\n\r\n\r\nclass DBC_Tree(DBC):\r\n    def __init__(self,T=\"auto\",weighted=False):\r\n        super().__init__(T=T)\r\n        self.weighted = weighted\r\n    def discretize(self,X,y):\r\n        self.clf_discretizer = DecisionTreeDiscretizer(T=self.T,weighted=self.weighted)\r\n        self.clf_discretizer.fit(X, y)\r\n        self.T = self.clf_discretizer.T\r\n\r\n\r\nclass DMC_Tree(DiscreteMinimaxClassifier):\r\n    def __init__(self,weighted=False,T=\"auto\"):\r\n        super().__init__(T=T)\r\n        self.weighted = weighted\r\n    def discretize(self,X,y):\r\n        #self.clf_discretizer = DecisionTreeDiscretizer(T=self.T,weighted=self.weighted)\r\n        self.clf_discretizer = ProbDiscretizer(T=self.T,classifier=DecisionTreeClassifier())\r\n        self.clf_discretizer.fit(X,y)\r\n        self.T =self.clf_discretizer.T\r\n\r\n    def get_T_optimal(self, X, y,T_start=None, T_end=None,Num_t_Values=15):\r\n\r\n        if T_start is None:\r\n            T_start = int(len(X) / 30)\r\n        if T_end is None:\r\n            T_end = int(len(X) / 4)\r\n        t_values = np.unique(np.linspace(T_start, T_end, Num_t_Values, dtype=int))\r\n        #print(t_values)\r\n        param_grid = {\r\n            'T': t_values\r\n        }\r\n        grid_search = GridSearchCV(estimator=DBC_Tree(), param_grid=param_grid, cv=3, scoring=\"accuracy\")\r\n        grid_search.fit(X, y)\r\n        # Extraer todos los resultados\r\n        results = grid_search.cv_results_\r\n        mean_scores = results['mean_test_score']\r\n        params = results['param_T'].data  # 'param_T' es una columna de objetos\r\n\r\n        # Encuentra el mayor T entre los mejores scores\r\n        max_score = np.max(mean_scores)\r\n        best_Ts = [params[i] for i, score in enumerate(mean_scores) if score == max_score]\r\n        best_T = max(best_Ts)  # elegir el T más grande entre los mejores\r\n        return {'T': best_T}\r\n\r\n\r\n\r\n\r\ndef compute_pi(y, K):\r\n    \"\"\"\r\n    Parameters\r\n    ----------\r\n    y : ndarray of shape (n_samples,)\r\n        Labels\r\n\r\n    K : int\r\n        Number of classes\r\n\r\n    Returns\r\n    -------\r\n    pi : ndarray of shape (K,)\r\n        Proportion of classes\r\n    \"\"\"\r\n    pi = np.zeros(K)\r\n    total_count = len(y)\r\n\r\n    for k in range(K):\r\n        pi[k] = np.sum(y == k) / total_count\r\n    return pi\r\n\r\ndef compute_pHat(XD: np.ndarray, y, K, T):\r\n    \"\"\"\r\n    Parameters\r\n    ----------\r\n    XD : ndarray of shape (n_samples,)\r\n        Labels of profiles for each data point\r\n\r\n    y : ndarray of shape (n_samples,)\r\n        Labels\r\n\r\n    K : int\r\n        Number of classes\r\n\r\n    T : int\r\n        Number of profiles\r\n\r\n    Returns\r\n    -------\r\n    pHat : ndarray of shape(K, n_profiles)\r\n    Modificado\r\n    \"\"\"\r\n    #y = check_array(y, ensure_2d=False)\r\n    pHat = np.zeros((K, T))\r\n    for k in range(K):\r\n        Ik = np.where(y == k)[0]\r\n        mk = len(Ik)\r\n        if mk != 0:\r\n            pHat[k] = np.bincount(XD[Ik], minlength=T) / mk\r\n        else:\r\n            pHat[k] = np.zeros(T)\r\n        # Count number of occurrences of each value in array of non-negative ints.\r\n    return pHat\r\n\r\ndef delta_proba_U(U, pHat, pi, L, methode='before', temperature=0):\r\n    '''\r\n    Parameters\r\n    ----------\r\n    U : Array\r\n\r\n    pHat : Array of floats\r\n        Probability estimate of observing the features profile.\r\n    pi : Array of floats\r\n        Real class proportions.\r\n    L : Array\r\n        Loss function.\r\n\r\n    Returns\r\n    -------\r\n    Yhat : Vector\r\n        Predicted labels.\r\n    '''\r\n\r\n    def softmin_with_temperature(X, temperature=1.0, axis=1):\r\n        X = -X\r\n        X_max = np.max(X, axis=axis, keepdims=True)\r\n        X_adj = X - X_max\r\n\r\n        exp_X_adj = np.exp(X_adj / temperature)\r\n        softmax_output = exp_X_adj / np.sum(exp_X_adj, axis=axis, keepdims=True)\r\n\r\n        return softmax_output\r\n\r\n    lambd = U.T @ ((pi.T * L).T @ pHat).T\r\n\r\n    if methode == 'softmin':\r\n        prob = softmin_with_temperature(lambd, temperature)\r\n\r\n    elif methode == 'argmin':\r\n        prob = np.zeros_like(lambd)\r\n        rows = np.arange(lambd.shape[0])\r\n        cols = np.argmin(lambd, axis=1)\r\n        prob[rows, cols] = 1\r\n\r\n    elif methode == 'proportion':\r\n        prob = 1 - np.divide(lambd, np.sum(lambd, axis=1)[:, np.newaxis])\r\n\r\n    elif methode == 'before':\r\n        prob = 1 - np.divide(lambd, np.sum(lambd, axis=1)[:, np.newaxis])\r\n\r\n    elif methode == 'after':\r\n        prob_init = 1 - np.divide(lambd, np.sum(lambd, axis=1)[:, np.newaxis])\r\n        index = np.argmax(prob_init, axis=1)\r\n        prob = np.zeros_like(prob_init)\r\n        prob[np.arange(index.shape[0]), index] = 1\r\n    return prob\r\n\r\ndef compute_conditional_risk(y_true, y_pred, K=2, L=None):\r\n    '''\r\n    Function to compute the class-conditional risks.\r\n    Parameters\r\n    ----------\r\n    y_true : DataFrame\r\n        Real labels.\r\n    y_pred : Array\r\n        Predicted labels.\r\n    K : int\r\n        Number of classes.\r\n    L : Array\r\n        Loss Function.\r\n\r\n    Returns\r\n    -------\r\n    R : Array of floats\r\n        Conditional risks.\r\n    confmat : Matrix\r\n        Confusion matrix.\r\n    '''\r\n    if L is None:\r\n        L = np.ones((K, K)) - np.eye(K)\r\n    Labels = [i for i in range(K)]\r\n    confmat = confusion_matrix(np.array(y_true), np.array(y_pred), normalize='true', labels=Labels)\r\n    R = np.sum(np.multiply(L, confmat), axis=1)\r\n\r\n    return R\r\n\r\ndef max_risk(y_true, y_pred):\r\n    k = len(np.unique(y_true))\r\n    L = np.ones((k, k)) - np.eye(k)\r\n    pi = compute_pi(y_true, k)\r\n    R, M = compute_conditional_risk(y_true, y_pred, k, L)\r\n\r\ndef compute_global_risk(R, pi):\r\n    \"\"\"\r\n    Parameters\r\n    ----------\r\n    R : ndarray of shape (K,)\r\n        Conditional risk\r\n    pi : ndarray of shape (K,)\r\n        Proportion of classes\r\n\r\n    Returns\r\n    -------\r\n    r : float\r\n        Global risk.\r\n    \"\"\"\r\n\r\n    r = np.sum(R * pi)\r\n\r\n    return r\r\n\r\ndef predict_profile_label(pi, pHat, L):\r\n    lambd = (pi.reshape(-1, 1) * L).T @ pHat\r\n    lbar = np.argmin(lambd, axis=0)\r\n    return lbar\r\n\r\ndef proj_simplex_Condat(K, pi):\r\n    \"\"\"\r\n    This function is inspired from the article: L.Condat, \"Fast projection onto the simplex and the\r\n    ball\", Mathematical Programming, vol.158, no.1, pp. 575-585, 2016.\r\n    Parameters\r\n    ----------\r\n    K : int\r\n        Number of classes.\r\n    pi : Array of floats\r\n        Vector to project onto the simplex.\r\n\r\n    Returns\r\n    -------\r\n    piProj : List of floats\r\n        Priors projected onto the simplex.\r\n\r\n    \"\"\"\r\n\r\n    linK = np.linspace(1, K, K)\r\n    piProj = np.maximum(pi - np.max(((np.cumsum(np.sort(pi)[::-1]) - 1) / (linK[:]))), 0)\r\n    piProj = piProj / np.sum(piProj)\r\n    return piProj\r\n\r\ndef graph_convergence(V_iter):\r\n    '''\r\n    Parameters\r\n    ----------\r\n    V_iter : List\r\n        List of value of V at each iteration n.\r\n\r\n    Returns\r\n    -------\r\n    Plot\r\n        Plot of V_pibar.\r\n\r\n    '''\r\n\r\n    figConv = plt.figure(figsize=(8, 4))\r\n    plt_conv = figConv.add_subplot(1, 1, 1)\r\n    V = V_iter.copy()\r\n    V.insert(0, np.min(V))\r\n    font = {'weight': 'normal', 'size': 16}\r\n    plt_conv.plot(V, label='V(pi(n))')\r\n    plt_conv.set_xscale('log')\r\n    plt_conv.set_ylim(np.min(V), np.max(V) + 0.01)\r\n    plt_conv.set_xlim(10 ** 0)\r\n    plt_conv.set_xlabel('Interation n', fontdict=font)\r\n    plt_conv.set_title('Maximization of V over U', fontdict=font)\r\n    plt_conv.grid(True)\r\n    plt_conv.grid(which='minor', axis='x', ls='-.')\r\n    plt_conv.legend(loc=2, shadow=True)\r\n\r\ndef num2cell(a):\r\n    if type(a) is np.ndarray:\r\n        return [num2cell(x) for x in a]\r\n    else:\r\n        return a\r\n\r\ndef proj_onto_polyhedral_set(pi, Box, K):\r\n    '''\r\n    Parameters\r\n    ----------\r\n    pi : Array of floats\r\n        Vector to project onto the box-constrained simplex.\r\n    Box : Array\r\n        {'none', matrix} : Box-constraint on the priors.\r\n    K : int\r\n        Number of classes.\r\n\r\n    Returns\r\n    -------\r\n    piStar : Array of floats\r\n            Priors projected onto the box-constrained simplex.\r\n\r\n    '''\r\n\r\n    # Verification of constraints\r\n    for i in range(K):\r\n        for j in range(2):\r\n            if Box[i, j] < 0:\r\n                Box[i, j] = 0\r\n            if Box[i, j] > 1:\r\n                Box[i, j] = 1\r\n\r\n    # Generate matrix G:\r\n    U = np.concatenate((np.eye(K), -np.eye(K), np.ones((1, K)), -np.ones((1, K))))\r\n    eta = Box[:, 1].tolist() + (-Box[:, 0]).tolist() + [1] + [-1]\r\n\r\n    n = U.shape[0]\r\n\r\n    G = np.zeros((n, n))\r\n    for i in range(n):\r\n        for j in range(n):\r\n            G[i, j] = np.vdot(U[i, :], U[j, :])\r\n\r\n    # Generate subsets of {1,...,n}:\r\n    M = (2 ** n) - 1\r\n    I = num2cell(np.zeros((1, M)))\r\n\r\n    i = 0\r\n    for l in range(n):\r\n        T = list(combinations(list(range(n)), l + 1))\r\n        for p in range(i, i + len(T)):\r\n            I[0][p] = T[p - i]\r\n        i = i + len(T)\r\n\r\n    # Algorithm\r\n\r\n    for m in range(M):\r\n        Im = I[0][m]\r\n\r\n        Gmm = np.zeros((len(Im), len(Im)))\r\n        ligne = 0\r\n        for i in Im:\r\n            colonne = 0\r\n            for j in Im:\r\n                Gmm[ligne, colonne] = G[i, j]\r\n                colonne += 1\r\n            ligne += 1\r\n\r\n        if np.linalg.det(Gmm) != 0:\r\n\r\n            nu = np.zeros((2 * K + 2, 1))\r\n            w = np.zeros((len(Im), 1))\r\n            for i in range(len(Im)):\r\n                w[i] = np.vdot(pi, U[Im[i], :]) - eta[Im[i]]\r\n\r\n            S = np.linalg.solve(Gmm, w)\r\n\r\n            for e in range(len(S)):\r\n                nu[Im[e]] = S[e]\r\n\r\n            if np.any(nu < -10 ** (-10)) == False:\r\n                A = G.dot(nu)\r\n                z = np.zeros((1, 2 * K + 2))\r\n                for j in range(2 * K + 2):\r\n                    z[0][j] = np.vdot(pi, U[j, :]) - eta[j] - A[j]\r\n\r\n                if np.all(z <= 10 ** (-10)) == True:\r\n                    pi_new = pi\r\n                    for i in range(2 * K + 2):\r\n                        pi_new = pi_new - nu[i] * U[i, :]\r\n\r\n    piStar = pi_new\r\n\r\n    # Remove noisy small calculus errors:\r\n    piStar = piStar / piStar.sum()\r\n\r\n    return piStar\r\n\r\ndef proj_onto_U(pi, Box, K):\r\n    '''\r\n    Parameters\r\n    ----------\r\n    pi : Array of floats\r\n        Vector to project onto the box-constrained simplex..\r\n    Box : Matrix\r\n        {'none', matrix} : Box-constraint on the priors.\r\n    K : int\r\n        Number of classes.\r\n\r\n    Returns\r\n    -------\r\n    pi_new : Array of floats\r\n            Priors projected onto the box-constrained simplex.\r\n\r\n    '''\r\n\r\n    check_U = 0\r\n    if pi.sum() == 1:\r\n        for k in range(K):\r\n            if (pi[0][k] >= Box[k, 0]) & (pi[0][k] <= Box[k, 1]):\r\n                check_U = check_U + 1\r\n\r\n    if check_U == K:\r\n        pi_new = pi\r\n\r\n    if check_U < K:\r\n        pi_new = proj_onto_polyhedral_set(pi, Box, K)\r\n\r\n    return pi_new\r\n\r\ndef compute_piStar(pHat, y_train, K, L, T, N, optionPlot, Box):\r\n    \"\"\"\r\n    Parameters\r\n    ----------\r\n    pHat : Array of floats\r\n        Probability estimate of observing the features profile in each class.\r\n    y_train : Dataframe\r\n        Real labels of the training set.\r\n    K : int\r\n        Number of classes.\r\n    L : Array\r\n        Loss Function.\r\n    T : int\r\n        Number of discrete profiles.\r\n    N : int\r\n        Number of iterations in the projected subgradient algorithm.\r\n    optionPlot : int {0,1}\r\n        1 plots figure,   0: does not plot figure.\r\n    Box : Array\r\n        {'none', matrix} : Box-constraints on the priors.\r\n\r\n    Returns\r\n    -------\r\n    piStar : Array of floats\r\n        Least favorable priors.\r\n    rStar : float\r\n        Global risks.\r\n    RStar : Array of float\r\n        Conditional risks.\r\n    V_iter : Array\r\n        Values of the V function at each iteration.\r\n    stockpi : Array\r\n        Values of pi at each iteration.\r\n\r\n    \"\"\"\r\n    # IF BOX-CONSTRAINT == NONE (PROJECTION ONTO THE SIMPLEX)\r\n    if Box is None:\r\n        pi = compute_pi(y_train, K).reshape(1, -1)\r\n        rStar = 0\r\n        piStar = pi\r\n        RStar = 0\r\n\r\n        V_iter = []\r\n        stockpi = np.zeros((K, N))\r\n\r\n        for n in range(1, N + 1):\r\n            # Compute subgradient R at point pi (see equation (21) in the paper)\r\n            lambd = np.dot(L, pi.T * pHat)\r\n            R = np.zeros((1, K))\r\n\r\n            mu_k = np.sum(L[:, np.argmin(lambd, axis=0)] * pHat, axis=1)\r\n            R[0, :] = mu_k\r\n            stockpi[:, n - 1] = pi[0, :]\r\n\r\n            r = compute_global_risk(R, pi)\r\n            V_iter.append(r)\r\n            if r > rStar:\r\n                #print(\"aa\", np.abs(r - rStar),n)\r\n                rStar = r\r\n                piStar = pi\r\n                RStar = R\r\n                # Update pi for iteration n+1\r\n            gamma = 1 / n\r\n            eta = np.maximum(float(1), np.linalg.norm(R))\r\n            w = pi + (gamma / eta) * R\r\n            pi = proj_simplex_Condat(K, w)\r\n\r\n        # Check if pi_N == piStar\r\n        lambd = np.dot(L, pi.T * pHat)\r\n        R = np.zeros((1, K))\r\n\r\n        mu_k = np.sum(L[:, np.argmin(lambd, axis=0)] * pHat, axis=1)\r\n        R[0, :] = mu_k\r\n        stockpi[:, n - 1] = pi[0, :]\r\n\r\n        r = compute_global_risk(R, pi)\r\n        if r > rStar:\r\n\r\n            rStar = r\r\n            piStar = pi\r\n            RStar = R\r\n\r\n        if optionPlot == 1:\r\n            print(\"si\")\r\n            graph_convergence(V_iter)\r\n\r\n    # IF BOX-CONSTRAINT\r\n    if Box is not None:\r\n        pi = compute_pi(y_train, K).reshape(1, -1)\r\n        rStar = 0\r\n        piStar = pi\r\n        RStar = 0\r\n\r\n        V_iter = []\r\n        stockpi = np.zeros((K, N))\r\n\r\n        for n in range(1, N + 1):\r\n            # Compute subgradient R at point pi (see equation (21) in the paper)\r\n            lambd = np.dot(L, pi.T * pHat)\r\n            R = np.zeros((1, K))\r\n\r\n            mu_k = np.sum(L[:, np.argmin(lambd, axis=0)] * pHat, axis=1)\r\n            R[0, :] = mu_k\r\n            stockpi[:, n - 1] = pi[0, :]\r\n\r\n            r = compute_global_risk(R, pi)\r\n            V_iter.append(r)\r\n            if r > rStar:\r\n                rStar = r\r\n                piStar = pi\r\n                RStar = R\r\n                # Update pi for iteration n+1\r\n            gamma = 1 / n\r\n            eta = np.maximum(float(1), np.linalg.norm(R))\r\n            w = pi + (gamma / eta) * R\r\n            pi = proj_onto_U(w, Box, K)\r\n\r\n        # Check if pi_N == piStar\r\n        lambd = np.dot(L, pi.T * pHat)\r\n        R = np.zeros((1, K))\r\n\r\n        mu_k = np.sum(L[:, np.argmin(lambd, axis=0)] * pHat, axis=1)\r\n        R[0, :] = mu_k\r\n        stockpi[:, n - 1] = pi[0, :]\r\n\r\n        r = compute_global_risk(R, pi)\r\n        if r > rStar:\r\n            rStar = r\r\n            piStar = pi\r\n            RStar = R\r\n\r\n        if optionPlot == 1:\r\n            print(\"AQU\")\r\n            graph_convergence(V_iter)\r\n\r\n    return piStar, rStar, RStar, V_iter, stockpi\r\n\r\nimport copy\r\n\r\nimport numpy as np\r\n\r\nclass BinaryRelevance:\r\n    def __init__(self, classifier):\r\n        \"\"\"\r\n        classifier: un estimador de scikit-learn con métodos fit(X, y) y predict(X)\r\n        \"\"\"\r\n        self.base_clf = classifier\r\n\r\n    def fit(self, X, Y):\r\n        \"\"\"\r\n        Ajusta un clasificador independiente por cada etiqueta.\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n        Y : array-like, shape (n_samples, n_labels)\r\n        \"\"\"\r\n        X = np.asarray(X)\r\n        Y = np.asarray(Y)\r\n        n_labels = Y.shape[1]\r\n        self.classifiers_ = []\r\n\r\n        for i in range(n_labels):\r\n            # Creamos un clon limpio del clasificador base\r\n            clf = clone(self.base_clf)\r\n            # Ajustamos en la i-ésima columna de Y\r\n            clf.fit(X, Y[:, i])\r\n            self.classifiers_.append(clf)\r\n        return self\r\n\r\n    def predict(self, X):\r\n        \"\"\"\r\n        Predice todas las etiquetas generando un array (n_samples, n_labels) de 0/1.\r\n\r\n        Parámetros\r\n        ----------\r\n        X : array-like, shape (n_samples, n_features)\r\n\r\n        Devuelve\r\n        -------\r\n        Y_pred : array, shape (n_samples, n_labels)\r\n        \"\"\"\r\n        X = np.asarray(X)\r\n        # Para cada clasificador, obtenemos su predicción binaria\r\n        preds = [clf.predict(X) for clf in self.classifiers_]\r\n        # Transponer para obtener forma (n_samples, n_labels)\r\n        return np.vstack(preds).T\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/DMC.py b/lib/DMC.py
+--- a/lib/DMC.py	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
++++ b/lib/DMC.py	(date 1747310063578)
+@@ -620,7 +620,7 @@
+         super().__init__(T=T)
+         self.weighted = weighted
+     def discretize(self,X,y):
+-        #self.clf_discretizer = DecisionTreeDiscretizer(T=self.T,weighted=self.weighted)
++        self.clf_discretizer = DecisionTreeDiscretizer(T=self.T,weighted=self.weighted)
+         self.clf_discretizer = ProbDiscretizer(T=self.T,classifier=DecisionTreeClassifier())
+         self.clf_discretizer.fit(X,y)
+         self.T =self.clf_discretizer.T
+Index: results/figuracopy.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/results/figuracopy.py b/results/Basura/figuracopy1.py
+rename from results/figuracopy.py
+rename to results/Basura/figuracopy1.py
+--- a/results/figuracopy.py	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
++++ b/results/Basura/figuracopy1.py	(date 1747307301141)
+@@ -7,21 +7,37 @@
+ # ─── CONFIG ────────────────────────────────────────────────────
+ base_dir     = os.path.abspath(os.path.dirname(__file__))
+ paper_folder = os.path.join(base_dir, "Paper")
+-inferencia   = "Hamming"
++inferencia   = "Subset"
+ 
+ modelos = [
+-    "DMC_Union","BR_DMC","KmeansU","KmeansU_ROS",
++"BR_DMC", "DMC_Kmeans",
++    "DMC_Union","KmeansU","KmeansU_ROS",
+     "DMC_LR","LR","WLR","LR_ROS",
+-    "DMC_DT2","DT","WDT","DT_ROS"
++    "DMC_DT","DT","WDT","DT_ROS"
+ ]
+ 
++label_names = {
++    "BR_DMC":      "DMBRC",
++    "DMC_Kmeans":  "DMPCC-KMs",
++    "DMC_Union":   "DMPCC-KMsU",
++    "KmeansU":     "PCC-DBC",
++    "KmeansU_ROS": "PCC-DBC-ROS",
++    "DMC_LR":      "DMPCC-LR",
++    "LR":          "PCC-LR",
++    "WLR":         "PCC-WLR",
++    "LR_ROS":      "PCC-LR-ROS",
++    "DMC_DT":      "DMPCC-DT",
++    "DT":          "PCC-DT",
++    "WDT":         "PCC-WDT",
++    "DT_ROS":      "PCC-DT-ROS",
++}
+ metrics = [
+-    "Hamming Mean", "Phi avg Mean", "Phi max Mean",
++    "Zero one Mean", "Phi avg Mean", "Phi max Mean",
+     "Psi avg Mean",   "Psi max Mean"
+ ]
+ 
+ higher_is_better = {
+-    "Hamming Mean":   False,
++    "Zero one Mean":   False,
+     "Phi avg Mean":   False,
+     "Phi max Mean":   False,
+     "Psi avg Mean":   False,
+@@ -38,20 +54,22 @@
+ 
+ # ─── MAPAS DE ESTILO ───────────────────────────────────────────
+ color_map = {
++    "DMC_Kmeans": "#9467BD", #Unico
+     "DMC_Union":   "tab:blue",
+     "KmeansU":     "tab:blue",
+     "KmeansU_ROS": "tab:blue",
+-    "BR_DMC":      "tab:purple",
++    "BR_DMC":      "#7F7F7F", #Unico
+     "DMC_LR":      "tab:green",
+     "LR":          "tab:green",
+     "WLR":         "tab:green",
+     "LR_ROS":      "tab:green",
+-    "DMC_DT2":     "tab:red",
++    "DMC_DT":     "tab:red",
+     "DT":          "tab:red",
+     "WDT":         "tab:red",
+     "DT_ROS":      "tab:red"
+ }
+ 
++
+ linestyle_map = {
+     "Minimax":    "-",
+     "Normal":     "--",
+@@ -61,6 +79,7 @@
+ }
+ 
+ inf_map = {
++    "DMC_Kmeans": "Unica",
+     "DMC_Union":   "Minimax",
+     "KmeansU":     "Normal",
+     "KmeansU_ROS": "Resampling",
+@@ -69,7 +88,7 @@
+     "LR":          "Normal",
+     "WLR":         "Cost",
+     "LR_ROS":      "Resampling",
+-    "DMC_DT2":     "Minimax",
++    "DMC_DT":     "Minimax",
+     "DT":          "Normal",
+     "WDT":         "Cost",
+     "DT_ROS":      "Resampling"
+@@ -115,8 +134,8 @@
+     vals += vals[:1]
+     fam_color = color_map[model]
+     ls        = linestyle_map[inf_map[model]]
+-    ax.plot(angles, vals, color=fam_color, linestyle=ls, linewidth=2, label=model)
+-    ax.fill(angles, vals, color=fam_color, alpha=0.25)
++    ax.plot(angles, vals, color=fam_color, linestyle=ls, linewidth=2, label=label_names[model])
++    ax.fill(angles, vals, color=fam_color, alpha=0.1)
+ 
+ ax.set_theta_offset(np.pi/2)
+ ax.set_theta_direction(-1)
+Index: results/hipotesisBuenp.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/results/hipotesisBuenp.py b/results/Basura/hipotesisBuenp.py
+rename from results/hipotesisBuenp.py
+rename to results/Basura/hipotesisBuenp.py
+--- a/results/hipotesisBuenp.py	(revision e82f0d413793fbc41bdd53f57a1628a3398864ce)
++++ b/results/Basura/hipotesisBuenp.py	(date 1747216584709)
+@@ -9,7 +9,9 @@
+ 
+ metrica           = "Zero one Mean"   # nombre exacto de la columna a analizar
+ inferencia        = "Subset"        # sufijo “-inf” dentro de la columna model
+-lower_is_better   = True       # ← ¡IMPORTANTE! cambia según la métrica
++lower_is_better   = True
++
++Pair_models = ["DMC_Union","KmeansU_ROS",]
+ 
+ # Modelos a comparar (tal como aparecen antes del guion en la columna model)
+ modelos = [
+Index: results/Basura/DT_Discretization.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/results/Basura/DT_Discretization.py b/results/Basura/DT_Discretization.py
+new file mode 100644
+--- /dev/null	(date 1747311120100)
++++ b/results/Basura/DT_Discretization.py	(date 1747311120100)
+@@ -0,0 +1,53 @@
++import numpy as np
++import pandas as pd
++import matplotlib.pyplot as plt
++from sklearn.datasets import make_blobs
++from sklearn.cluster import KMeans
++from scipy.spatial import Voronoi, voronoi_plot_2d
++
++from lib.DMC import DecisionTreeDiscretizer
++
++# 1) Datos
++X, y = make_blobs(n_samples=[4500, 500],
++                  n_features=2,
++                  centers=[(9.5, 10), (10.5, 7.6)],
++                  cluster_std=[[1, 1.5], [0.9, 0.9]],
++                  shuffle=True,
++                  random_state=42)
++
++# 2) Ajustar discretizador
++disc = DecisionTreeDiscretizer(T=25, min_samples_leaf=15)
++disc.fit(X, y)
++
++# 3) Malla para el gráfico
++x_min, x_max = X[:,0].min() - 0.5, X[:,0].max() + 0.5
++y_min, y_max = X[:,1].min() - 0.5, X[:,1].max() + 0.5
++xx, yy = np.meshgrid(
++    np.arange(x_min, x_max, 0.02),
++    np.arange(y_min, y_max, 0.02)
++)
++grid = np.c_[xx.ravel(), yy.ravel()]
++Z = disc.predict(grid).reshape(xx.shape)
++
++# 4) Scatter + contorno de regiones + Voronoi de centroides
++plt.figure(figsize=(12, 8))
++
++# —1— Líneas negras de separación de hojas (entre valores enteros)
++levels = np.arange(1, disc.T) - 0.5
++plt.contour(xx, yy, Z, levels=levels, colors='black', linewidths=1)
++
++# —2— Scatter original (dos clusters)
++plt.scatter(X[y==0,0], X[y==0,1],
++            color='deepskyblue', marker='.', s=90, label='C1')
++plt.scatter(X[y==1,0], X[y==1,1],
++            color='orange',    marker='*', s=80, label='C2')
++
++
++# 5) Ajustes finales
++plt.xlabel("$X_1$", fontsize=15)
++plt.ylabel("$X_2$", fontsize=15)
++plt.title("Discretización con Árbol de Decisión (líneas de región)", fontsize=18)
++plt.legend(loc='upper right', fontsize=12)
++plt.xlim(x_min, x_max)
++plt.ylim(y_min, y_max)
++plt.show()
+diff --git a/results/regression3.py b/results/Basura/regression3.py
+rename from results/regression3.py
+rename to results/Basura/regression3.py
+diff --git a/results/hipotesis_inferencia.py b/results/Basura/hipotesis_inferencia.py
+rename from results/hipotesis_inferencia.py
+rename to results/Basura/hipotesis_inferencia.py
+diff --git a/results/scatter_plot.py b/results/Basura/scatter_plot.py
+rename from results/scatter_plot.py
+rename to results/Basura/scatter_plot.py
+diff --git a/results/hipotesis_grupo.py b/results/Basura/hipotesis_grupo.py
+rename from results/hipotesis_grupo.py
+rename to results/Basura/hipotesis_grupo.py
+diff --git a/results/figura.py b/results/Basura/figura.py
+rename from results/figura.py
+rename to results/Basura/figura.py
