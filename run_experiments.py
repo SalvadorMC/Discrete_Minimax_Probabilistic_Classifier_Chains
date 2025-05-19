@@ -15,15 +15,15 @@ from lib.DMC import DBC, DiscreteMinimaxClassifier, DBC_KmeansU, DMC_KmeansU, DM
 
 datasets = {
     "CHD_49": load_data(dataset_name="CHD_49.arff"),
-    #"Emotions": load_data(dataset_name="Emotions.arff"),
-    #"GnegativePseAAC": load_data(dataset_name="GnegativePseAAC.arff"),
-    #"GpositivePseAAC": load_data(dataset_name="GpositivePseAAC.arff"),
-    #"Scene": load_data(dataset_name="Scene.arff"),
-    #"VirusPseAAC": load_data(dataset_name="VirusPseAAC.arff"),
-    #"Image": load_data(dataset_name="Image.arff"),
-    #"Flags": load_data(dataset_name="Flags.arff"),
-    #"Foodtruck": load_data(dataset_name="Foodtruck.arff"),
-    #"PlantPseAAC": load_data(dataset_name="PlantPseAAC.arff"),sssddds
+    "Emotions": load_data(dataset_name="Emotions.arff"),
+    "GnegativePseAAC": load_data(dataset_name="GnegativePseAAC.arff"),
+    "GpositivePseAAC": load_data(dataset_name="GpositivePseAAC.arff"),
+    "Scene": load_data(dataset_name="Scene.arff"),
+    "VirusPseAAC": load_data(dataset_name="VirusPseAAC.arff"),
+    "Image": load_data(dataset_name="Image.arff"),
+    "Flags": load_data(dataset_name="Flags.arff"),
+    "Foodtruck": load_data(dataset_name="Foodtruck.arff"),
+    "PlantPseAAC": load_data(dataset_name="PlantPseAAC.arff"),
 }
 
 # Models
